@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NumberGuesser</string>
+    <string name="guess_button">Strzel</string>
+    <string name="restart_button">Restart</string>
+    <string name="new_game_button">Nowa Gra</string>
+    <string name="guess_count">Liczba strzałów:</string>
+    <string name="score_count">Liczba punktów:</string>
+    <string name="input_hint">Podaj liczbę od 0 do 20</string>
+</resources>
