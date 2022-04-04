@@ -1,12 +1,17 @@
-package com.example.numberguesser
+package com.example.numberguesser.activities.mainactivity
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.numberguesser.DB.Contract.Contract
+import com.example.numberguesser.GameData
+import com.example.numberguesser.R
+import com.example.numberguesser.activities.loginactivity.LoginActivity
 import com.google.android.material.textfield.TextInputLayout
 import kotlin.random.Random
 
@@ -14,37 +19,55 @@ class MainActivity : AppCompatActivity() {
     var gameData = GameData()
     var randomizedNumber = Random.nextInt(0,20)
     private lateinit var builder: AlertDialog.Builder
+    lateinit var guessButton : Button
+    lateinit var scoreboardButton : Button
+    lateinit var newGameButton : Button
+    lateinit var logoutButton : Button
+    lateinit var scoreView : TextView
+    lateinit var guessCountView : TextView
+    lateinit var numberInput : TextInputLayout
+    lateinit var dbHelper : Contract.UserDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        readScoreFromMemory()
+
         builder = AlertDialog.Builder(this@MainActivity)
-        val guessButton = findViewById<Button>(R.id.guessButton)
-        val restartButton = findViewById<Button>(R.id.restartButton)
-        val newGameButton = findViewById<Button>(R.id.newGameButton)
-        val scoreView = findViewById<TextView>(R.id.scoreCountView)
-        val guessCountVIew = findViewById<TextView>(R.id.guessCountView)
-        val numberInput = findViewById<TextInputLayout>(R.id.numberInput)
+        guessButton = findViewById<Button>(R.id.guessButton)
+        scoreboardButton = findViewById<Button>(R.id.buttonScoreboard)
+        newGameButton = findViewById<Button>(R.id.newGameButton)
+        logoutButton = findViewById(R.id.buttonLogout)
+        scoreView = findViewById<TextView>(R.id.scoreCountView)
+        guessCountView = findViewById<TextView>(R.id.guessCountView)
+        numberInput = findViewById<TextInputLayout>(R.id.numberInput)
+
+        dbHelper = Contract.UserDbHelper(applicationContext)
+        val currentUsername = readCurrentUserFromMemory()
+        if (currentUsername != null) {
+            val user = dbHelper.getUserByUsername(currentUsername)
+            gameData.score = user.currentScore
+        }
 
         scoreView.text = getString(R.string.score_count, gameData.score)
-        guessCountVIew.text = getString(R.string.guess_count, gameData.guess_count)
+        guessCountView.text = getString(R.string.guess_count, gameData.guess_count)
 
-        restartButton.setOnClickListener() {
-            gameData.resetGuessCount()
-            gameData.resetScore()
-            saveScoreToMemory()
-            randomizedNumber = Random.nextInt(0,20)
-            scoreView.text = getString(R.string.score_count, gameData.score)
-            guessCountVIew.text = getString(R.string.guess_count, gameData.guess_count)
-            showToast("Zresetowano stan gry")
+        scoreboardButton.setOnClickListener() {
+//            val intent = Intent(this, ScoreboardActivity::class.java)
+//            startActivity(intent)
         }
 
         newGameButton.setOnClickListener() {
             gameData.resetGuessCount()
             randomizedNumber = Random.nextInt(0, 20)
-            guessCountVIew.text = getString(R.string.guess_count, gameData.guess_count)
+            guessCountView.text = getString(R.string.guess_count, gameData.guess_count)
             showToast("Wylosowano nową liczbę")
+        }
+
+        logoutButton.setOnClickListener() {
+            saveCurrentUserToMemory("")
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         guessButton.setOnClickListener() {
@@ -66,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                     dialog.show()
                     gameData.resetGuessCount()
                     gameData.resetScore()
-                    saveScoreToMemory()
+                    saveScoreToDB()
                 } else if (randomizedNumber == guessedNumber){
                     val score = determineScore()
                     builder.setTitle("BRAWO")
@@ -76,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     dialog.show()
                     gameData.resetGuessCount()
                     gameData.addToScore(score)
-                    saveScoreToMemory()
+                    saveScoreToDB()
                     randomizedNumber = Random.nextInt(0,20)
                 } else if (randomizedNumber < guessedNumber){
                     showToast("Podana liczba jest większa od wylosowanej")
@@ -86,8 +109,13 @@ class MainActivity : AppCompatActivity() {
             }
             guessedNumberText?.clear()
             scoreView.text = getString(R.string.score_count, gameData.score)
-            guessCountVIew.text = getString(R.string.guess_count, gameData.guess_count)
+            guessCountView.text = getString(R.string.guess_count, gameData.guess_count)
         }
+    }
+
+    override fun onDestroy() {
+        dbHelper.close()
+        super.onDestroy()
     }
 
     private fun determineScore(): Int {
@@ -108,14 +136,30 @@ class MainActivity : AppCompatActivity() {
         ).show()
     }
 
-    fun saveScoreToMemory(){
+    private fun saveScoreToDB(){
+        dbHelper.updateUserScore(readCurrentUserFromMemory()!!, gameData.score)
+    }
+
+    private fun saveCurrentUserToMemory(username: String){
+        val shared = getSharedPreferences("com.example.numberguesser.shared",0)
+        val edit = shared.edit()
+        edit.putString("current_user", username)
+        edit.apply()
+    }
+
+    private fun readCurrentUserFromMemory(): String? {
+        val shared = getSharedPreferences("com.example.numberguesser.shared",0)
+        return shared.getString("current_user", "")
+    }
+
+    private fun saveScoreToMemory(){
         val sharedScore = getSharedPreferences("com.example.numberguesser.shared",0)
         val edit = sharedScore.edit()
         edit.putInt("score", gameData.score)
         edit.apply()
     }
 
-    fun readScoreFromMemory(){
+    private fun readScoreFromMemory(){
         val sharedScore = getSharedPreferences("com.example.numberguesser.shared",0)
         gameData.score = sharedScore.getInt("score", 0)
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.mainactivity.MainActivity">
 
     <TextView
         android:id="@+id/titleView"
@@ -25,49 +25,45 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="19dp"
         android:layout_marginEnd="56dp"
+        android:layout_marginBottom="244dp"
         android:text="@string/guess_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberInput" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/newGameButton"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginTop="138dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="180dp"
         android:text="@string/new_game_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guessButton" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/restartButton"
+        android:id="@+id/buttonScoreboard"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="138dp"
-        android:layout_marginBottom="65dp"
-        android:text="@string/restart_button"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="180dp"
+        android:text="@string/show_scoreboard_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guessButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/numberInput"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="106dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="19dp"
-        app:layout_constraintBottom_toTopOf="@+id/guessButton"
+        android:layout_marginBottom="316dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guessCountView">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -102,5 +98,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreCountView" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="72dp"
+        android:text="@string/logout_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,26 @@
 <resources>
     <string name="app_name">NumberGuesser</string>
+    <string name="login_button">Zaloguj się lub utwórz konto</string>
+    <string name="edit_username_hint">Nazwa użytkownika</string>
+    <string name="edit_password_hint">Hasło</string>
+    <string name="switch_register">Załóż konto</string>
     <string name="guess_button">Strzel</string>
-    <string name="restart_button">Restart</string>
+    <string name="logout_button">Wyloguj</string>
+    <string name="show_scoreboard_button">Ranking</string>
     <string name="new_game_button">Nowa Gra</string>
     <string name="guess_count">Liczba strzałów: %1$d</string>
     <string name="score_count">Liczba punktów: %1$d</string>
     <string name="input_hint">Podaj liczbę od 0 do 20</string>
+    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>
