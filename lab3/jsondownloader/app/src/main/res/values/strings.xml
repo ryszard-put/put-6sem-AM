@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JSONdownloader</string>
+    <string name="loading_indicator">Ladowanie zawartości</string>
+</resources>
