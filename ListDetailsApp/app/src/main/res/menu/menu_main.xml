@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.listdetailsapp.MainActivity"
+    tools:showIn="navigation_view">
+    <group>
+        <item android:id="@+id/about_page"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="O aplikacji" />
+    </group>
+<!--    <group android:id="@+id/categories_group" android:checkableBehavior="single">-->
+<!--        <item-->
+<!--            android:id="@+id/categories_subtitle"-->
+<!--            android:title="Kategorie">-->
+<!--            <menu>-->
+<!--                <item-->
+<!--                    android:id="@+id/category_distance"-->
+<!--                    android:icon="@drawable/ic_baseline_directions_walk_24"-->
+<!--                    android:title="Dystans" />-->
+<!--                <item-->
+<!--                    android:id="@+id/category_location"-->
+<!--                    android:icon="@drawable/ic_baseline_map_24"-->
+<!--                    android:title="Lokalizacja" />-->
+<!--            </menu>-->
+<!--        </item>-->
+<!--    </group>-->
+</menu>
