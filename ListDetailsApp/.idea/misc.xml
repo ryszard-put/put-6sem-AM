@@ -10,6 +10,12 @@
         <entry key="..\:/Politechnika/semestr6/AM/ListDetailsApp/app/src/main/res/layout/fragment_list.xml" value="0.3197463768115942" />
         <entry key="..\:/Politechnika/semestr6/AM/ListDetailsApp/app/src/main/res/layout/fragment_second.xml" value="0.276268115942029" />
         <entry key="..\:/Politechnika/semestr6/AM/ListDetailsApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.34010416666666665" />
+        <entry key="app/src/main/res/layout/fragment_category.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2015625" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>
