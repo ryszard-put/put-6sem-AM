@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".JoggingDetailsFragment">
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/details_content">
     <TextView
         android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="test1"
     android:id="@+id/textTitle" />
 
     <TextView
         android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:text="test2"
     android:id="@+id/textDescription" />
 
+
     <fragment
         xmlns:map="http://schemas.android.com/apk/res-auto"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.example.jogging.JoggingDetailsFragment"
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    </LinearLayout>
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/stopwatchFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible"
+        app:srcCompat="@drawable/icon_timer"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_anchor="@id/details_content" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

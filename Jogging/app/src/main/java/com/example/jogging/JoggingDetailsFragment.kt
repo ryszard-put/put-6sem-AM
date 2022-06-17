@@ -1,5 +1,6 @@
 package com.example.jogging
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class JoggingDetailsFragment : Fragment(), OnMapReadyCallback {
@@ -25,7 +27,8 @@ class JoggingDetailsFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        val jogging = Jogging.getJoggingList().find{it.id == joggingId}
+        val jogging = Jogging.getJogging(joggingId)
+        println(jogging)
         googleMap.addPolyline(
             PolylineOptions()
                 .clickable(true)
@@ -44,6 +47,12 @@ class JoggingDetailsFragment : Fragment(), OnMapReadyCallback {
         val view = inflater.inflate(R.layout.fragment_jogging_details, container, false)
         val supportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         supportMapFragment.getMapAsync(this)
+        val stopwatchFAB =  view.findViewById<FloatingActionButton>(R.id.stopwatchFAB)
+
+        stopwatchFAB.setOnClickListener {
+            onStopwatchButtonCLicked()
+        }
+
         return view
     }
 
@@ -51,7 +60,7 @@ class JoggingDetailsFragment : Fragment(), OnMapReadyCallback {
         super.onStart()
         val view = view
         if (view != null) {
-            val jogging = Jogging.getJoggingList().find { it.id == joggingId }
+            val jogging = Jogging.getJogging(joggingId)
             val title = view.findViewById<TextView>(R.id.textTitle)
             val description = view.findViewById<TextView>(R.id.textDescription)
             title.text = jogging!!.title
@@ -66,5 +75,13 @@ class JoggingDetailsFragment : Fragment(), OnMapReadyCallback {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("joggingId", joggingId)
+    }
+
+    fun onStopwatchButtonCLicked() {
+        val intent = Intent(context, StopwatchActivity::class.java)
+        intent.apply {
+            putExtra("JOGGING_ID", joggingId)
+        }
+        startActivity(intent)
     }
 }

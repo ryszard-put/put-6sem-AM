@@ -22,6 +22,6 @@ class DetailsActivity : AppCompatActivity() {
 
         val joggingDetailsFragment = supportFragmentManager.findFragmentById(R.id.details_frag) as JoggingDetailsFragment
         val joggingId = intent.extras!!.get(EXTRA_JOGGING_ID)
-        joggingDetailsFragment.setJoggingId(Jogging.getJoggingList()[joggingId as Int].id)
+        joggingDetailsFragment.setJoggingId(joggingId as String)
     }
 }
